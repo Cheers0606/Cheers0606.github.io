@@ -28,7 +28,25 @@ RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 Warning: Permanently added 'github.com,13.229.188.59' (RSA) to the list of known hosts.
 Hi Cheers0606! You've successfully authenticated, but GitHub does not provide shell access.
+
+# 修改_config.yml的deploy配置
+# 安装deploy-git模块
+npm install hexo-deployer-git --save
+
+hexo clean
+hexo generate
+hexo deploy
+
 ```
 
 ## hexo 常用操作
-
+```bash
+hexo new "postName" #新建文章
+hexo new page "pageName" #新建页面
+hexo generate #生成静态页面至public目录
+hexo server #开启预览访问端口（默认端口4000，'ctrl + c'关闭server）
+hexo deploy #部署到GitHub
+hexo help  # 查看帮助
+hexo version  #查看Hexo的版本
+hexo clean #清理public的内容
+```
