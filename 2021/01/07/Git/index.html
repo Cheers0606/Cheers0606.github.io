@@ -24,13 +24,26 @@
     <a href="/index.html"><i class="fa fa-reply replay-btn" aria-hidden="true"></i></a>
     <div class="post-title">
         <p>
-            about
+            Git
         </p>
         <hr>
     </div>
     <div class="post-content">
-        <p>about me</p>
-
+        <h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><h2 id="合并分支、打tag"><a href="#合并分支、打tag" class="headerlink" title="合并分支、打tag"></a>合并分支、打tag</h2><p>参考 <a target="_blank" rel="noopener" href="https://wiki.datastory.com.cn/pages/viewpage.action?pageId=38618481#id-%E5%B7%A5%E5%9C%BA%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91README-4.3%E5%8F%91%E5%B8%83&%E6%89%93tag">https://wiki.datastory.com.cn/pages/viewpage.action?pageId=38618481#id-%E5%B7%A5%E5%9C%BA%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91README-4.3%E5%8F%91%E5%B8%83&amp;%E6%89%93tag</a></p>
+<h3 id="合并分支操作：（以合并dev到master为例子）"><a href="#合并分支操作：（以合并dev到master为例子）" class="headerlink" title="合并分支操作：（以合并dev到master为例子）"></a>合并分支操作：（以合并dev到master为例子）</h3><p>a. 切换到master分支 git checkout master</p>
+<p>b. 合并代码 git merge dev</p>
+<p>c. 推到远程 git push</p>
+<h3 id="发布前"><a href="#发布前" class="headerlink" title="发布前"></a>发布前</h3><p>dev提交pr到master –&gt; idea 下载 gitlab project插件，然后配置下gitlab的服务器 </p>
+<p><img src="gitlab" alt="/image/gitlab-project.png"></p>
+<p>review 然后合并到master</p>
+<p>修改版本号 mvn versions:set -DnewVersion=1.4.2.0-SNAPSHOT -DgenerateBackupPoms=false 并提交</p>
+<p>发布系统打tag</p>
+<h3 id="打tag"><a href="#打tag" class="headerlink" title="打tag"></a>打tag</h3><ol>
+<li>代码准备：合并代码等，确定打tag的分支（一般是master分支，cic需要打tag用cic分支）</li>
+<li>pom文件的版本号修改/确认，如需要发布 1.4.2.0 版本，可以执行： mvn versions:set -DnewVersion=1.4.2.0-SNAPSHOT -DgenerateBackupPoms=false</li>
+<li>到 <a target="_blank" rel="noopener" href="https://deploy.datastory.com.cn/#/deploy/Create%EF%BC%8C%E9%80%89%E6%8B%A9%E9%A1%B9%E7%9B%AE">https://deploy.datastory.com.cn/#/deploy/Create，选择项目</a> ds-trident-backend 、分支，选择操作（“打tag”）及平台（rocket）然后确认，注意确认编译的参数，然后会自动跳到“发布进度”，需要再次点击确认 </li>
+</ol>
+<h3 id="完成后重新rebase"><a href="#完成后重新rebase" class="headerlink" title="完成后重新rebase"></a>完成后重新rebase</h3>
     </div>
 
     
