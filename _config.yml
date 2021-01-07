@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+title: 仰望星空
+subtitle: '和你在一起'
+description: '每年都会有新的开始，希望能坚持下去'
 keywords:
-author: John Doe
-language: en
+author: 张俊杉
+language: cn
 timezone: ''
 
 # URL
@@ -103,4 +103,6 @@ theme: geek
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/Cheers0606/Cheers0606.github.io.git
+  branch: main
