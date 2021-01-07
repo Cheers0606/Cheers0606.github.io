@@ -103,4 +103,6 @@ theme: geek
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/Cheers0606/enoch.github.io.git
+  branch: main
