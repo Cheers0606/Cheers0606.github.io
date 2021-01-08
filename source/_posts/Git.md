@@ -1,7 +1,9 @@
 ---
 title: Git
 date: 2021-01-07 15:28:10
+updated: 2021-01-08 10:21:10
 tags: git
+categories: git # 目录
 ---
 # Git
 
@@ -23,7 +25,7 @@ c. 推到远程 git push
 
 dev提交pr到master --> idea 下载 gitlab project插件，然后配置下gitlab的服务器 
 
-![/image/gitlab-project.png](gitlab)
+![gitlab](/image/gitlab-project.png)
 
 review 然后合并到master
 
