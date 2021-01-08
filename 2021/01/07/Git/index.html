@@ -65,11 +65,6 @@
 <p>review 然后合并到master</p>
 <p>修改版本号 mvn versions:set -DnewVersion=1.4.2.0-SNAPSHOT -DgenerateBackupPoms=false 并提交</p>
 <p>发布系统打tag</p>
-<h3 id="打tag"><a href="#打tag" class="headerlink" title="打tag"></a>打tag</h3><ol>
-<li>代码准备：合并代码等，确定打tag的分支（一般是master分支，cic需要打tag用cic分支）</li>
-<li>pom文件的版本号修改/确认，如需要发布 1.4.2.0 版本，可以执行： mvn versions:set -DnewVersion=1.4.2.0-SNAPSHOT -DgenerateBackupPoms=false</li>
-<li>到 <a target="_blank" rel="noopener" href="https://deploy.datastory.com.cn/#/deploy/Create%EF%BC%8C%E9%80%89%E6%8B%A9%E9%A1%B9%E7%9B%AE">https://deploy.datastory.com.cn/#/deploy/Create，选择项目</a> ds-trident-backend 、分支，选择操作（“打tag”）及平台（rocket）然后确认，注意确认编译的参数，然后会自动跳到“发布进度”，需要再次点击确认 </li>
-</ol>
 <h3 id="完成后重新rebase"><a href="#完成后重新rebase" class="headerlink" title="完成后重新rebase"></a>完成后重新rebase</h3>
       </div>
         <div class="support-author">
