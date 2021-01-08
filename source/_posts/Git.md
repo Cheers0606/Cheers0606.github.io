@@ -33,13 +33,4 @@ review 然后合并到master
 
 发布系统打tag
 
-### 打tag
-
-1. 代码准备：合并代码等，确定打tag的分支（一般是master分支，cic需要打tag用cic分支）
-2. pom文件的版本号修改/确认，如需要发布 1.4.2.0 版本，可以执行： mvn versions:set -DnewVersion=1.4.2.0-SNAPSHOT -DgenerateBackupPoms=false
-3. 到 https://deploy.datastory.com.cn/#/deploy/Create，选择项目 ds-trident-backend 、分支，选择操作（“打tag”）及平台（rocket）然后确认，注意确认编译的参数，然后会自动跳到“发布进度”，需要再次点击确认 
-
 ### 完成后重新rebase
-
-
-
