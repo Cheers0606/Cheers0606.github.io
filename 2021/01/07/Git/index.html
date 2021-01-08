@@ -74,7 +74,7 @@
       </div>
         <div class="support-author">
           <p>感谢您的阅读。 🙏
-          <a href="" target="_blank">关于转载请看这里</a>
+          <!-- <a href="" target="_blank">关于转载请看这里</a> -->
             <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
           </p>
         </div>
@@ -147,6 +147,16 @@
     console.log('%c' + o, textStyle);
   });
 }(consoleConfig));</script><script type="text/javascript" src="/./js/main.js"></script>
+
+<!--
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+ -->
+  <script src="/./js/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
 
   <script src="//at.alicdn.com/t/font_159214_mvtxvg9me9.js"></script>
 </body>

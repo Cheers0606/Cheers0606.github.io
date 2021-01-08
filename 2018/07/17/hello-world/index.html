@@ -69,7 +69,72 @@
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><div id="flowchart-0" class="flow-chart"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: Start|past:>http://www.google.com[blank]
+<h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><div id="flowchart-0" class="flow-chart"></div>
+
+
+<h3 id="class-disagram"><a href="#class-disagram" class="headerlink" title="class disagram"></a>class disagram</h3><pre class="mermaid">classDiagram
+    Class01 <|-- AveryLongClass : Cool
+    Class03 *-- Class04
+    Class05 o-- Class06
+    Class07 .. Class08
+    Class09 --> C2 : Where am i?
+    Class09 --* C3
+    Class09 --|> Class07
+    Class07 : equals()
+    Class07 : Object[] elementData
+    Class01 : size()
+    Class01 : int chimp
+    Class01 : int gorilla
+    Class08 <--> C2: Cool label</pre>
+
+<h3 id="sequence"><a href="#sequence" class="headerlink" title="sequence"></a>sequence</h3><pre class="mermaid">sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop Healthcheck
+        John->>John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts <br/>prevail...
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!</pre>
+<h3 id="gantt"><a href="#gantt" class="headerlink" title="gantt"></a>gantt</h3><pre class="mermaid">gantt
+    dateFormat  YYYY-MM-DD
+    title Adding GANTT diagram to mermaid
+
+    section A section
+    Completed task            :done,    des1, 2014-01-06,2014-01-08
+    Active task               :active,  des2, 2014-01-09, 3d
+    Future task               :         des3, after des2, 5d
+    Future task2               :         des4, after des3, 5d</pre>
+
+<h3 id="mermaid-diagrams"><a href="#mermaid-diagrams" class="headerlink" title="mermaid diagrams"></a>mermaid diagrams</h3><pre class="mermaid">graph TD;
+    A[test]
+    B[hello]
+    D-->G
+    A-->B
+    A-->C
+    B-->D
+    C-->D
+    subgraph test
+    E-->G
+    end</pre>
+<h3 id="graph-TD"><a href="#graph-TD" class="headerlink" title="graph TD"></a>graph TD</h3><p>```mermaid<br>graph TD;<br>    runJob–&gt;ostart<br>    ostart–&gt;jstart<br>    processRuleUpdatedLabel–是–&gt;cleanStart<br>    subgraph all<br>    start[开始]–&gt;edit[修改标签]<br>    edit–执行标签任务–&gt;redis[提交到redis的allJob队列]<br>    redis–JobAcceptor#parseMessage–&gt;runJob[执行标签 调用海纳]<br>    end</p>
+<pre><code>subgraph ocean[海纳任务]
+ostart[海纳task]--&gt;oend[海纳任务执行完成]
+end
+
+subgraph JobTracker
+jstart[从redis的scheduler:running获取运行中的任务]--&gt;isJobEnd&#123;任务是否到达终态&#125;
+isJobEnd--是--&gt;updateLabelCoverage[更新标签覆盖数]--&gt;processRuleUpdatedLabel&#123;判断规则是否改过&#125;
+updateLabelCoverage--&gt;processOneTimeLabelStatus[一次性标签需要修改oneTimeStatus状态位为已执行]--&gt;removeFromRedisSet[从redis的running中删除]--&gt;oend
+isJobEnd--否--&gt;jstart
+end
+
+subgraph ofCleanOldRuleJob[清理修改过规则后的过期标签]
+cleanStart--&gt;cleanEnd
+end</code></pre>
+<p>```<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: Start|past:>http://www.google.com[blank]
 e=>end: End:>http://www.google.com
 op1=>operation: My Operation|past
 op2=>operation: Stuff|current
@@ -83,11 +148,12 @@ st->op1(right)->cond
 cond(yes, right)->c2
 cond(no)->sub1(left)->op1
 c2(yes)->io->e
-c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script>
+c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script></p>
+
       </div>
         <div class="support-author">
           <p>感谢您的阅读。 🙏
-          <a href="" target="_blank">关于转载请看这里</a>
+          <!-- <a href="" target="_blank">关于转载请看这里</a> -->
             <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
           </p>
         </div>
@@ -160,6 +226,16 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
     console.log('%c' + o, textStyle);
   });
 }(consoleConfig));</script><script type="text/javascript" src="/./js/main.js"></script>
+
+<!--
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+ -->
+  <script src="/./js/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
 
   <script src="//at.alicdn.com/t/font_159214_mvtxvg9me9.js"></script>
 </body>
