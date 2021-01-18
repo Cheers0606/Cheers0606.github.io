@@ -5,7 +5,7 @@
 # Site
 title: 仰望星空
 subtitle: '和你在一起'
-description: '每年都会有新的开始，希望能坚持下去'
+description: '希望能坚持下去'
 keywords:
 author: 张俊杉
 language: cn
@@ -98,7 +98,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: yearn
+theme: butterfly
 
 flowchart:
   # raphael:   # optional, the source url of raphael.js
