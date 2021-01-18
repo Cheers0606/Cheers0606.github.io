@@ -633,10 +633,10 @@ aside:
       enable: true
       icon: fab fa-github
       text: Follow Me
-      link: https://github.com/xxxxxx
+      link: https://github.com/cheers0606
   card_announcement:
     enable: true
-    content: This is my Blog
+    content: hello, how's your day?
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
@@ -649,7 +649,7 @@ aside:
     sort_order: # Don't modify the setting unless you know how it works
   card_tags:
     enable: true
-    limit: 40 # if set 0 will show all
+    limit: 10 # if set 0 will show all
     color: false
     sort_order: # Don't modify the setting unless you know how it works
   card_archives:
@@ -748,7 +748,7 @@ fancybox: true
 # mermaid
 # see https://github.com/knsv/mermaid
 mermaid:
-  enable: false
+  enable: true
   # built-in themes: default/forest/dark/neutral
   theme: default
 
@@ -816,7 +816,7 @@ pangu:
 # Lazyload (圖片懶加載)
 # https://github.com/verlok/lazyload
 lazyload:
-  enable: false
+  enable: true
   post: /img/loading.gif
 
 # PWA
