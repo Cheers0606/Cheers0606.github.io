@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="希望能坚持下去">
+    <meta name="keyword"  content="enoch">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        标签体系改造 - Enoch的博客 | Enoch&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> We are all in the gutter, but some of us are looking at the stars. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/favicon.ico" />
+        </div>
+        <div class="name">
+            <i>张俊杉</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E4%BD%93%E7%B3%BBES%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88%EF%BC%88es-v5%EF%BC%89"><span class="toc-text">标签体系ES存储方案（es v5）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%88%86%E8%AF%8D%E5%99%A8"><span class="toc-text">设置分词器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#index"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#type"><span class="toc-text">type</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#info"><span class="toc-text">info</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#label"><span class="toc-text">label</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#schema"><span class="toc-text">schema</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#info-1"><span class="toc-text">info</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#label-1"><span class="toc-text">label</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%89%E5%8F%8A%E6%94%B9%E5%8A%A8"><span class="toc-text">涉及改动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%85%A5"><span class="toc-text">写入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E6%95%B4%E4%BD%93%E5%86%99%E5%85%A5%E6%B5%81%E7%A8%8B"><span class="toc-text">原整体写入流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%B9%E5%8A%A8%E5%90%8E%E7%9A%84%E5%86%99%E5%85%A5%E6%B5%81%E7%A8%8B"><span class="toc-text">改动后的写入流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#merge%E7%9B%B8%E5%85%B3"><span class="toc-text">merge相关</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9"><span class="toc-text">修改</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F"><span class="toc-text">原</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%B9%E5%90%8E"><span class="toc-text">改后</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4"><span class="toc-text">删除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F-1"><span class="toc-text">原</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%B9%E5%90%8E-1"><span class="toc-text">改后</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2"><span class="toc-text">查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F-2"><span class="toc-text">原</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%B9%E5%90%8E-2"><span class="toc-text">改后</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%BA%E7%BE%A4%E5%8C%85"><span class="toc-text">人群包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BE%85%E7%A1%AE%E8%AE%A4"><span class="toc-text">待确认</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E6%A1%882-%E6%95%B0%E7%BB%84"><span class="toc-text">方案2 数组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%89-nested"><span class="toc-text">方案三 nested</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> We are all in the gutter, but some of us are looking at the stars. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        标签体系改造
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2021-01-19 16:44:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#trident label 标签" title="trident label 标签">trident label 标签</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="标签体系ES存储方案（es-v5）"><a href="#标签体系ES存储方案（es-v5）" class="headerlink" title="标签体系ES存储方案（es v5）"></a>标签体系ES存储方案（es v5）</h1><h2 id="设置分词器"><a href="#设置分词器" class="headerlink" title="设置分词器"></a>设置分词器</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;settings&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;analysis&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;analyzer&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;vertical&quot;</span>: &#123;</span><br><span class="line">          <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;pattern&quot;</span>,</span><br><span class="line">          <span class="attr">&quot;parttern&quot;</span>: <span class="string">&quot;\\|&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="index"><a href="#index" class="headerlink" title="index"></a>index</h2><p>每个treeType为一个index，名称为trident_es_{treeTypeId}</p>
+<h2 id="type"><a href="#type" class="headerlink" title="type"></a>type</h2><h3 id="info"><a href="#info" class="headerlink" title="info"></a>info</h3><p>对应打标签对象的物料表</p>
+<h3 id="label"><a href="#label" class="headerlink" title="label"></a>label</h3><p>存储标签</p>
+<blockquote>
+<p><strong>info和label为父子文档</strong></p>
+</blockquote>
+<h2 id="schema"><a href="#schema" class="headerlink" title="schema"></a>schema</h2><h3 id="info-1"><a href="#info-1" class="headerlink" title="info"></a>info</h3><p>和物料表字段类型保持一致，string类型的都为keyword</p>
+<h3 id="label-1"><a href="#label-1" class="headerlink" title="label"></a>label</h3><p>label中有多个properties，设置索引模板</p>
+<p>每个标签树对应三个字段：tree_{treeId}_label，tree_{treeId}_label_expire_time，tree_{treeId}_label_update_time，每个字段设置类型为text，设置分词器为\|</p>
+<p>字段中存储多个标签，每个标签用｜分割</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">     <span class="attr">&quot;_source&quot;</span>:&#123;</span><br><span class="line">          <span class="attr">&quot;tree_1_label&quot;</span>:<span class="string">&quot;1_男｜2_四川|3_中国&quot;</span>,</span><br><span class="line">          <span class="attr">&quot;tree_1_label_expire_time&quot;</span>:<span class="string">&quot;1_2100-01-01T00:00:00+08:00|2_2100-01-01T00:00:00+08:00|3_2100-01-01T00:00:00+08:00&quot;</span>,</span><br><span class="line">          <span class="attr">&quot;tree_1_label_update_time&quot;</span>:<span class="string">&quot;1_2100-01-01T00:00:00+08:00|2_2100-01-01T00:00:00+08:00|3_2100-01-01T00:00:00+08:00&quot;</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="涉及改动"><a href="#涉及改动" class="headerlink" title="涉及改动"></a>涉及改动</h2><h3 id="写入"><a href="#写入" class="headerlink" title="写入"></a>写入</h3><h4 id="原整体写入流程"><a href="#原整体写入流程" class="headerlink" title="原整体写入流程"></a>原整体写入流程</h4><ul>
+<li>根据标签规则设置，生成相应的打标签sql（基于hive）</li>
+<li>将标签结果写入到hive中的all_temp_tag里（竖表，分区表）<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> db_datastory_trident.all_temp_tags(</span><br><span class="line">     entity_id string COMMENT <span class="string">&#x27;实体ID&#x27;</span>,</span><br><span class="line">     label_val string COMMENT <span class="string">&#x27;标签值&#x27;</span>,</span><br><span class="line">     expire_time <span class="type">timestamp</span> COMMENT <span class="string">&#x27;过期时间，默认为unix_timestamp()&#x27;</span>,</span><br><span class="line">     create_time <span class="type">timestamp</span> COMMENT <span class="string">&#x27;创建时间，默认为unix_timestamp()&#x27;</span></span><br><span class="line">) PARTITIONED <span class="keyword">BY</span> (entity_type <span class="type">INT</span>,label_date <span class="type">DATE</span>,label_id <span class="type">INT</span>)</span><br><span class="line"> <span class="type">ROW</span> FORMAT DELIMITED FIELDS TERMINATED <span class="keyword">BY</span> <span class="string">&#x27;\001&#x27;</span> STORED <span class="keyword">AS</span> textfile;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> db_datastory_trident.all_temp_tags <span class="keyword">PARTITION</span>(entity_type<span class="operator">=</span><span class="number">543</span>, label_date<span class="operator">=</span><span class="string">&#x27;#&#123;#cur_date&#125;&#x27;</span>, label_id<span class="operator">=</span><span class="number">3275</span>)</span><br><span class="line"><span class="keyword">SELECT</span> tdm_cdp_tdm_user_91510124MA61X5CT68.user_id <span class="keyword">AS</span> entity_id,</span><br><span class="line">       <span class="string">&#x27;覆盖四川人群&#x27;</span> <span class="keyword">AS</span> label_val,</span><br><span class="line">       FROM_UNIXTIME(<span class="number">4102416000</span>) <span class="keyword">AS</span> expire_time,</span><br><span class="line">       FROM_UNIXTIME(UNIX_TIMESTAMP()) <span class="keyword">AS</span> create_time</span><br><span class="line"><span class="keyword">FROM</span> tdm_cdp.tdm_user_91510124MA61X5CT68 <span class="keyword">AS</span> tdm_cdp_tdm_user_91510124MA61X5CT68</span><br><span class="line"><span class="keyword">WHERE</span> tdm_cdp_tdm_user_91510124MA61X5CT68.user_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">  <span class="keyword">AND</span> tdm_cdp_tdm_user_91510124MA61X5CT68.`province`<span class="operator">=</span><span class="string">&#x27;四川省&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>将结果竖表转成横表，刷到hbase和es中<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">## hbase_label_&#123;treeTypeId&#125;_temp_&#123;labelId&#125;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> db_datastory_trident.hbase_label_543_temp_3275;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">EXTERNAL</span> <span class="keyword">TABLE</span> db_datastory_trident.hbase_label_543_temp_3275(user_id string,label_3275 string,label_3275_update_time <span class="type">TIMESTAMP</span>,label_3275_expire_time <span class="type">TIMESTAMP</span>) STORED <span class="keyword">BY</span> <span class="string">&#x27;org.apache.hadoop.hive.hbase.HBaseStorageHandler&#x27;</span> <span class="keyword">WITH</span> SERDEPROPERTIES ( <span class="string">&#x27;hbase.columns.mapping&#x27;</span><span class="operator">=</span><span class="string">&#x27;:key,labels:label_3275,labels:label_3275_update_time,labels:label_3275_expire_time&#x27;</span>) TBLPROPERTIES ( <span class="string">&#x27;hbase.mapred.output.outputtable&#x27;</span><span class="operator">=</span><span class="string">&#x27;db_datastory_trident.hbase_label_543&#x27;</span>, <span class="string">&#x27;hbase.table.name&#x27;</span><span class="operator">=</span><span class="string">&#x27;db_datastory_trident.hbase_label_543&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">TABLE</span> db_datastory_trident.hbase_label_543_temp_3275</span><br><span class="line"><span class="keyword">SELECT</span> entity_id,</span><br><span class="line">       label_val,</span><br><span class="line">       create_time,</span><br><span class="line">       expire_time</span><br><span class="line"><span class="keyword">FROM</span> db_datastory_trident.all_temp_tags</span><br><span class="line"><span class="keyword">WHERE</span> entity_type<span class="operator">=</span><span class="number">543</span></span><br><span class="line">  <span class="keyword">AND</span> label_date<span class="operator">=</span><span class="string">&#x27;#&#123;#cur_date&#125;&#x27;</span></span><br><span class="line">  <span class="keyword">AND</span> label_id<span class="operator">=</span><span class="number">3275</span>;</span><br><span class="line"></span><br><span class="line">## tmp_trident_es_&#123;treeTypeId&#125;_label_&#123;labelId&#125;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> db_datastory_trident.tmp_trident_es_543_label_3275;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">EXTERNAL</span> <span class="keyword">TABLE</span> db_datastory_trident.tmp_trident_es_543_label_3275(user_id string,label_3275 string,label_3275_update_time <span class="type">TIMESTAMP</span>,label_3275_expire_time <span class="type">TIMESTAMP</span>) STORED <span class="keyword">BY</span> <span class="string">&#x27;org.elasticsearch.hadoop.hive.EsStorageHandler&#x27;</span> TBLPROPERTIES(&quot;es.nodes&quot;<span class="operator">=</span>&quot;xdp-prod-es1:9200&quot;, &quot;es.write.operation&quot;<span class="operator">=</span>&quot;upsert&quot;, &quot;es.update.retry.on.conflict&quot;<span class="operator">=</span>&quot;10&quot;, &quot;es.resource&quot;<span class="operator">=</span>&quot;trident_es_543/label_default&quot;, &quot;es.mapping.id&quot;<span class="operator">=</span>&quot;user_id&quot;, &quot;es.mapping.parent&quot;<span class="operator">=</span>&quot;user_id&quot;, &quot;es.mapping.routing&quot;<span class="operator">=</span>&quot;user_id&quot;, &quot;es.mapping.names&quot;<span class="operator">=</span>&quot;user_id:user_id,label_3275:label_3275,label_3275_update_time:label_3275_update_time,label_3275_expire_time:label_3275_expire_time&quot;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">TABLE</span> db_datastory_trident.tmp_trident_es_543_label_3275</span><br><span class="line"><span class="keyword">SELECT</span> user_id,</span><br><span class="line">       label_3275,</span><br><span class="line">       label_3275_update_time,</span><br><span class="line">       label_3275_expire_time</span><br><span class="line"><span class="keyword">FROM</span> db_datastory_trident.hbase_label_543_temp_3275;</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> db_datastory_trident.hbase_label_543_temp_3275;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> db_datastory_trident.tmp_trident_es_543_label_3275;</span><br></pre></td></tr></table></figure>
+<h4 id="改动后的写入流程"><a href="#改动后的写入流程" class="headerlink" title="改动后的写入流程"></a>改动后的写入流程</h4></li>
+<li>根据标签规则设置，生成相应的打标签sql（基于hive） ==&gt; 不变</li>
+<li>将标签结果写入到hive中的all_temp_tag里（竖表，分区表） ==&gt; 分区增加tree<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> db_datastory_trident.all_temp_tags(</span><br><span class="line">     entity_id string COMMENT <span class="string">&#x27;实体ID&#x27;</span>,</span><br><span class="line">     label_val string COMMENT <span class="string">&#x27;标签值&#x27;</span>,</span><br><span class="line">     expire_time <span class="type">timestamp</span> COMMENT <span class="string">&#x27;过期时间，默认为unix_timestamp()&#x27;</span>,</span><br><span class="line">     create_time <span class="type">timestamp</span> COMMENT <span class="string">&#x27;创建时间，默认为unix_timestamp()&#x27;</span></span><br><span class="line">) PARTITIONED <span class="keyword">BY</span> (entity_type <span class="type">INT</span>,tree_id <span class="type">INT</span>,label_date <span class="type">DATE</span>,label_id <span class="type">INT</span>)</span><br><span class="line"> <span class="type">ROW</span> FORMAT DELIMITED FIELDS TERMINATED <span class="keyword">BY</span> <span class="string">&#x27;\001&#x27;</span> STORED <span class="keyword">AS</span> textfile;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> db_datastory_trident.all_temp_tags <span class="keyword">PARTITION</span>(entity_type<span class="operator">=</span><span class="number">543</span>, tree_id<span class="operator">=</span><span class="number">1</span>, label_date<span class="operator">=</span><span class="string">&#x27;#&#123;#cur_date&#125;&#x27;</span>, label_id<span class="operator">=</span><span class="number">3275</span>)</span><br><span class="line"><span class="keyword">SELECT</span> tdm_cdp_tdm_user_91510124MA61X5CT68.user_id <span class="keyword">AS</span> entity_id,</span><br><span class="line">       <span class="string">&#x27;覆盖四川人群&#x27;</span> <span class="keyword">AS</span> label_val,</span><br><span class="line">       FROM_UNIXTIME(<span class="number">4102416000</span>) <span class="keyword">AS</span> expire_time,</span><br><span class="line">       FROM_UNIXTIME(UNIX_TIMESTAMP()) <span class="keyword">AS</span> create_time</span><br><span class="line"><span class="keyword">FROM</span> tdm_cdp.tdm_user_91510124MA61X5CT68 <span class="keyword">AS</span> tdm_cdp_tdm_user_91510124MA61X5CT68</span><br><span class="line"><span class="keyword">WHERE</span> tdm_cdp_tdm_user_91510124MA61X5CT68.user_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">  <span class="keyword">AND</span> tdm_cdp_tdm_user_91510124MA61X5CT68.`province`<span class="operator">=</span><span class="string">&#x27;四川省&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>将结果竖表转成横表，刷到hbase和es中 ==&gt; 修改逻辑，将多字段拼接成字符串</li>
+</ul>
+<p><strong>跑单个标签时，也走这种逻辑，性能问题？</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">## hbase_label_&#123;treeTypeId&#125;_&#123;treeId&#125;_temp</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> db_datastory_trident.hbase_label_543_1_temp_3275;</span><br><span class="line"></span><br><span class="line">## 新增标签树时，需要alterhbase表，增加相应字段（<span class="number">3</span>个）</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">EXTERNAL</span> <span class="keyword">TABLE</span> db_datastory_trident.hbase_label_543_1_temp_3275(user_id string,tree_1_label string,tree_1_label_update_time string,tree_1_label_expire_time string) STORED <span class="keyword">BY</span> <span class="string">&#x27;org.apache.hadoop.hive.hbase.HBaseStorageHandler&#x27;</span> <span class="keyword">WITH</span> SERDEPROPERTIES ( <span class="string">&#x27;hbase.columns.mapping&#x27;</span><span class="operator">=</span><span class="string">&#x27;:key,labels:tree_1_label,labels:tree_1_label_update_time,labels:tree_1_label_expire_time&#x27;</span>) TBLPROPERTIES ( <span class="string">&#x27;hbase.mapred.output.outputtable&#x27;</span><span class="operator">=</span><span class="string">&#x27;db_datastory_trident.hbase_label_543&#x27;</span>, <span class="string">&#x27;hbase.table.name&#x27;</span><span class="operator">=</span><span class="string">&#x27;db_datastory_trident.hbase_label_543&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">TABLE</span> db_datastory_trident.hbase_label_543_1_temp_3275</span><br><span class="line"><span class="keyword">SELECT</span> entity_id,</span><br><span class="line">       CONCAT_WS(<span class="string">&#x27;|&#x27;</span> ,collect_set(concat(label_id,&quot;_&quot;,label_val))),</span><br><span class="line">       CONCAT_WS(<span class="string">&#x27;|&#x27;</span> ,collect_set(concat(label_id,&quot;_&quot;,create_time))),</span><br><span class="line">       CONCAT_WS(<span class="string">&#x27;|&#x27;</span> ,collect_set(concat(label_id,&quot;_&quot;,expire_time)))</span><br><span class="line"><span class="keyword">FROM</span> db_datastory_trident.all_temp_tags</span><br><span class="line"><span class="keyword">WHERE</span> entity_type<span class="operator">=</span><span class="number">543</span></span><br><span class="line">  <span class="keyword">AND</span> tree_id<span class="operator">=</span><span class="number">1</span></span><br><span class="line">  <span class="keyword">AND</span> label_date<span class="operator">=</span><span class="string">&#x27;#&#123;#cur_date&#125;&#x27;</span></span><br><span class="line">  <span class="keyword">GROUP</span> <span class="keyword">BY</span> entity_id;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#<span class="number">00</span>b2d95622fd49c1ba79064ac09842df   <span class="number">1955</span>_标签测试_WSK<span class="operator">|</span><span class="number">1956</span>_teset<span class="operator">|</span><span class="number">1957</span>_DDD<span class="operator">|</span><span class="number">1953</span>_xdd_标签任务<span class="number">1</span><span class="operator">|</span><span class="number">1970</span>_标签测试_WSK12</span><br><span class="line">#<span class="number">00</span>b4e84465b8473c9cecb4cf35c41177   <span class="number">1955</span>_标签测试_WSK<span class="operator">|</span><span class="number">1956</span>_teset<span class="operator">|</span><span class="number">1970</span>_标签测试_WSK12</span><br><span class="line">#<span class="number">00</span>b91497d78e4eefa45cfd87fc3f319d   <span class="number">1955</span>_标签测试_WSK<span class="operator">|</span><span class="number">1956</span>_teset<span class="operator">|</span><span class="number">1957</span>_DDD<span class="operator">|</span><span class="number">1953</span>_xdd_标签任务<span class="number">1</span><span class="operator">|</span><span class="number">1970</span>_标签测试_WSK12</span><br><span class="line"></span><br><span class="line">## tmp_trident_es_&#123;treeTypeId&#125;_&#123;treeId&#125;_label_&#123;labelId&#125;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> db_datastory_trident.tmp_trident_es_543_1_label_3275;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">EXTERNAL</span> <span class="keyword">TABLE</span> db_datastory_trident.tmp_trident_es_543_1_label_3275(user_id string,tree_1_label string,tree_1_label_update_time string,tree_1_label_expire_time string) STORED <span class="keyword">BY</span> <span class="string">&#x27;org.elasticsearch.hadoop.hive.EsStorageHandler&#x27;</span> TBLPROPERTIES(&quot;es.nodes&quot;<span class="operator">=</span>&quot;xdp-prod-es1:9200&quot;, &quot;es.write.operation&quot;<span class="operator">=</span>&quot;upsert&quot;, &quot;es.update.retry.on.conflict&quot;<span class="operator">=</span>&quot;10&quot;, &quot;es.resource&quot;<span class="operator">=</span>&quot;trident_es_543/label_default&quot;, &quot;es.mapping.id&quot;<span class="operator">=</span>&quot;user_id&quot;, &quot;es.mapping.parent&quot;<span class="operator">=</span>&quot;user_id&quot;, &quot;es.mapping.routing&quot;<span class="operator">=</span>&quot;user_id&quot;, &quot;es.mapping.names&quot;<span class="operator">=</span>&quot;user_id:user_id,tree_1_label:tree_1_label,tree_1_label_update_time:tree_1_label_update_time,tree_1_label_expire_time:tree_1_label_expire_time&quot;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">TABLE</span> db_datastory_trident.tmp_trident_es_543_1_label_3275</span><br><span class="line"><span class="keyword">SELECT</span> user_id,</span><br><span class="line">       tree_1_label,</span><br><span class="line">       tree_1_label_update_time,</span><br><span class="line">       tree_1_label_expire_time</span><br><span class="line"><span class="keyword">FROM</span> db_datastory_trident.hbase_label_543_temp_3275;</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> db_datastory_trident.hbase_label_543_1_temp_3275;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> db_datastory_trident.tmp_trident_es_543_1_label_3275;</span><br></pre></td></tr></table></figure>
+<p><strong>强制要求标签名中不能有“|”</strong></p>
+<h4 id="merge相关"><a href="#merge相关" class="headerlink" title="merge相关"></a>merge相关</h4><h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><h4 id="原"><a href="#原" class="headerlink" title="原"></a>原</h4><h4 id="改后"><a href="#改后" class="headerlink" title="改后"></a>改后</h4><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><h4 id="原-1"><a href="#原-1" class="headerlink" title="原"></a>原</h4><h4 id="改后-1"><a href="#改后-1" class="headerlink" title="改后"></a>改后</h4><h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><h4 id="原-2"><a href="#原-2" class="headerlink" title="原"></a>原</h4><h4 id="改后-2"><a href="#改后-2" class="headerlink" title="改后"></a>改后</h4><h1 id="人群包"><a href="#人群包" class="headerlink" title="人群包"></a>人群包</h1><p>修改相应的查询，仍然是has_child+query，query中采用bool+match的形式<br><font color="red">涉及到标签过期的话，采用script？</font></p>
+<h1 id="待确认"><a href="#待确认" class="headerlink" title="待确认"></a>待确认</h1><ul>
+<li><input checked="" disabled="" type="checkbox"> leo表达式是否支持转换es的match请求 ==&gt; 支持 详见<a target="_blank" rel="noopener" href="https://wiki.datastory.com.cn/x/AOM4AQ">Leo表达式汇总文档</a><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;must&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;1##match(内容,中国)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;2##match(内容,贸易战)&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">&quot;mustNot&quot;</span>: [],</span><br><span class="line">    <span class="attr">&quot;boolExpression&quot;</span>: <span class="string">&quot;1 OR 2&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><input disabled="" type="checkbox"> 更新时的性能问题<br>  更新某个标签时，因为是字符串，所以不能直接update，需要用script的方式去更新。将值取出来，split，找到对应的标签，update取值</li>
+</ul>
+<blockquote>
+<p><font color="red">数组方案宣告失败。<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/5.6/array.html">参考官网说明</a></font></p>
+</blockquote>
+<h1 id="方案2-数组"><a href="#方案2-数组" class="headerlink" title="方案2 数组"></a>方案2 数组</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">PUT test2/label_default/19b2a580d86946a7b886ac2e79b581f2/_create</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;tree_2&quot;</span>:[</span><br><span class="line">      <span class="string">&quot;1641,客户有下单,1610990713000,4102416000000&quot;</span>,</span><br><span class="line">      <span class="string">&quot;1953,xdd_标签任务1,1610990713000,4102416000000&quot;</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PUT test2/label_default/1a0ec7855540498696a1ed50a16e1228/_create</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;tree_2&quot;</span>:[</span><br><span class="line">      <span class="string">&quot;1641,客户有下单,1610990713000,4102416000000&quot;</span>    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 更新目前不行</span></span><br><span class="line">POST test2/label_default/_update</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;query&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;bool&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;must&quot;</span>: [</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">          <span class="string">&quot;match&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;tree_2&quot;</span>: <span class="string">&quot;xdd_标签任务1&quot;</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;script&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;source&quot;</span>: <span class="string">&quot;List&lt;String&gt; source = ctx._source.tree_2; for(int i=0;i&lt;source.size();i++)&#123;String[] tmp = source[i].split(\&quot;,\&quot;); tmp[2] = params.updateTime; ctx._source.tree_2[i]=tmp.join(\&quot;,\&quot;); &#125;&quot;</span>,</span><br><span class="line">    <span class="string">&quot;params&quot;</span>:&#123;</span><br><span class="line">      <span class="string">&quot;updateTime&quot;</span>:1611115065000</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;lang&quot;</span>: <span class="string">&quot;painless&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="方案三-nested"><a href="#方案三-nested" class="headerlink" title="方案三 nested"></a>方案三 nested</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/Cheers0606">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://www.baidu.com">百度一下</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://enochblog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
