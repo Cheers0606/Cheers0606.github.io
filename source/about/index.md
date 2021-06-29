@@ -1,7 +1,9 @@
 ---
-title: 关于我
+title: "About"
+layout: "about"
 date: 2021-01-07 13:31:06
 tag: about
+comments: true
 ---
 
 老程序员了

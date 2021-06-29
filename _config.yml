@@ -1,14 +1,15 @@
+__: aircloud
 # Hexo Configuration
 ## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
 title: 仰望星空
-subtitle: '和你在一起'
+subtitle: 'We are all in the gutter, but some of us are looking at the stars.'
 description: '希望能坚持下去'
 keywords:
 author: 张俊杉
-language: cn
+language: zh
 timezone: ''
 
 # URL
@@ -21,11 +22,62 @@ pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
 
+# Site settings
+# 网站综合内容设置：
+SEOTitle: Enoch的博客 | Enoch's Blog
+email: cheers0606520@gmail.com
+keyword: "enoch"
+
+# SNS settings
+# 一些社交平台地址，支持以下几种：
+#weibo_username:     3286578617
+#zhihu_username:     ai-er-lan-xue-da
+github_username:    Cheers0606
+#twitter_username:   iconie_alloy
+#facebook_username:  xiaotao.nie.5
+#linkedin_username:  小涛-聂-80964aba
+
+sidebar-avatar: img/favicon.ico
+# Friends
+# 友情链接
+friends: [
+  {
+    title: "百度一下",
+    href: "https://www.baidu.com"
+  },{
+    title: "It helps SEO",
+    href: "#"
+  }
+]
+#comment:
+#  type: gitment
+#  id: your-id-created-by-https://github.com/settings/applications/new
+#  secret: your-secret-created-by-https://github.com/settings/applications/new
+#  owner: aircloud
+#  repo: hexo-aircloud-blog
+
+comment:
+  type: disqus
+  script: 'https://enochblog.disqus.com/embed.js'
+
+# The following content is not recommended to modify
+# 搜索数据文件路径设置，不建议改动：
+search:
+  path: search.json
+  field: post
+#donate:
+#  img: img/donate.jpg
+#  content: 感谢鼓励
+
+# 文章样式(是否首行缩进)：
+post_style:
+  indent: default
+
 # Directory
 source_dir: source
 public_dir: public
 tag_dir: tags
-archive_dir: archives
+archive_dir: archive
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
@@ -98,7 +150,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: butterfly
+theme: hexo-theme-aircloud
 
 flowchart:
   # raphael:   # optional, the source url of raphael.js
