@@ -11,7 +11,7 @@
 
     <title>
         
-        Git - Enoch的博客 | Enoch&#39;s Blog
+        Spark动态加载hive配置的方案 - Enoch的博客 | Enoch&#39;s Blog
         
     </title>
 
@@ -93,7 +93,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git"><span class="toc-text">Git</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF%E3%80%81%E6%89%93tag"><span class="toc-text">合并分支、打tag</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C%EF%BC%9A%EF%BC%88%E4%BB%A5%E5%90%88%E5%B9%B6dev%E5%88%B0master%E4%B8%BA%E4%BE%8B%E5%AD%90%EF%BC%89"><span class="toc-text">合并分支操作：（以合并dev到master为例子）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E5%89%8D"><span class="toc-text">发布前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%88%90%E5%90%8E%E9%87%8D%E6%96%B0rebase"><span class="toc-text">完成后重新rebase</span></a></li></ol></li></ol></li></ol>
+    
 </div>
     
 </div>
@@ -124,15 +124,15 @@
 
 <div class="post-container">
     <div class="post-title">
-        Git
+        Spark动态加载hive配置的方案
     </div>
 
     <div class="post-meta">
-        <span class="attr">发布于：<span>2021-01-07 15:28:10</span></span>
+        <span class="attr">发布于：<span>2021-07-14 15:27:15</span></span>
         
         <span class="attr">标签：/
         
-        <a class="tag" href="/tags/#git" title="git">git</a>
+        <a class="tag" href="/tags/#spark" title="spark">spark</a>
         <span>/</span>
         
         
@@ -142,16 +142,22 @@
 </span>
     </div>
     <div class="post-content ">
-        <h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><h2 id="合并分支、打tag"><a href="#合并分支、打tag" class="headerlink" title="合并分支、打tag"></a>合并分支、打tag</h2><p>参考 <a target="_blank" rel="noopener" href="https://wiki.datastory.com.cn/pages/viewpage.action?pageId=38618481#id-%E5%B7%A5%E5%9C%BA%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91README-4.3%E5%8F%91%E5%B8%83&%E6%89%93tag">https://wiki.datastory.com.cn/pages/viewpage.action?pageId=38618481#id-%E5%B7%A5%E5%9C%BA%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91README-4.3%E5%8F%91%E5%B8%83&amp;%E6%89%93tag</a></p>
-<h3 id="合并分支操作：（以合并dev到master为例子）"><a href="#合并分支操作：（以合并dev到master为例子）" class="headerlink" title="合并分支操作：（以合并dev到master为例子）"></a>合并分支操作：（以合并dev到master为例子）</h3><p>a. 切换到master分支 git checkout master</p>
-<p>b. 合并代码 git merge dev</p>
-<p>c. 推到远程 git push</p>
-<h3 id="发布前"><a href="#发布前" class="headerlink" title="发布前"></a>发布前</h3><p>dev提交pr到master –&gt; idea 下载 gitlab project插件，然后配置下gitlab的服务器 </p>
-<p><img src="/image/gitlab-project.png" alt="gitlab"></p>
-<p>review 然后合并到master</p>
-<p>修改版本号 mvn versions:set -DnewVersion=1.4.2.0-SNAPSHOT -DgenerateBackupPoms=false 并提交</p>
-<p>发布系统打tag</p>
-<h3 id="完成后重新rebase"><a href="#完成后重新rebase" class="headerlink" title="完成后重新rebase"></a>完成后重新rebase</h3>
+        <blockquote>
+<p>转载自 (莱哥博客)[<a target="_blank" rel="noopener" href="https://leibnizhu.github.io/2020/05/06/%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BDhive%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%A1%88/]">https://leibnizhu.github.io/2020/05/06/%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BDhive%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%A1%88/]</a></p>
+</blockquote>
+<p>一般来说，Spark写Hive，把 <font color=gray>xxx-site.xml</font>系列配置文件打进jar包里，或spark-submit指定下file之类，new个HiveContext就完事了。<br>要写外部集群，也不外乎是换对应的<font color=gray>xxx-site.xml</font>，改改<font color=gray>thrift</font>服务地址啥的，不费劲。<br>好了，本文结束。</p>
+<p>不对，擅长断更的我不会为此特意写篇博客。</p>
+<p>现在的场景是，每次Spark任务启动的时候才能拿到外部Hive集群的配置信息（别问我为什么，问就是中台的需求，很多集群，java应用启动后才能去读到任务配置，反射组装RDD并执行，Hive配置？lazy的，到写入的时候才会去拿）。</p>
+<p>这个过程踩了不少坑，试了几种方案，直接说结论吧。</p>
+<ul>
+<li>SparkContext创建的时候会创建一个Configuration对象（注意 loadDefaults=true)，写入Hive会用到它；而这个Configuration对象里面已经放了常规的那些***-site.xml系列配置文件作为 defaultResources，这时写入Hive相当于按fat-jar里面的配置来了；</li>
+<li>围观Configuration代码，reload配置之后会将defaultResources逐个读出，而defaultResources是个有序的List，那么显然可以用Configuration#addDefaultResource()把外部集群的相关配置xml设置为默认资源，这样拿配置的时候就会拿到外部集群的配置啦！！！</li>
+<li>为了方便配置的读取，直接放在hdfs吧，这样直接Configuration.addDefaultResource(“hdfs:///path/to/hive-site.xml”)不就可以了吗？诶怎么不行，再围观Configuration代码，可以看到加载默认资源最终用的是Configuration#getResource()方法，这个方法体就一句话：return classLoader.getResource(name);，也就是说，它不会去解析hdfs协议，而是直接从classpath里面去读取。所以不能直接从hdfs读取；</li>
+<li>最后的方案是把配置文件放在hdfs，写入Hive前，把它下载到当前classpath的其中某个目录下（比如classpath包含. 则下载到System.getProperty(“user.dir”)下），然后Configuration.addDefaultResource(“hive-site.xml”)，因为Configuration是用ClassLoader进行加载的，所以注意路径没有/。</li>
+<li>这就完事了？并不，跑起来会发现还是查询jar包里的hive metastore地址，所以还要解析hive-site.xml，读取出hive.metastore.uris值并放入环境变量中。</li>
+<li>这就完事了？并不，考虑到后续还会有其他写入操作，以及SparkContext.stop()操作，这些操作都会用到Configuration读取配置，然而现在以及有了外部集群的默认资源了，需要删掉，然而Configuration并没有提供删除默认资源的方法，所以这里要手动反射删除之。</li>
+</ul>
+
         
         <br />
         <div id="comment-container">
