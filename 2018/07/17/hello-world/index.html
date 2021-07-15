@@ -205,30 +205,23 @@
     subgraph test
     E-->G
     end</pre>
-<h3 id="graph-TD"><a href="#graph-TD" class="headerlink" title="graph TD"></a>graph TD</h3><pre class="mermaid">graph TD;
-    runJob-->ostart
-    ostart-->jstart
-    processRuleUpdatedLabel--是-->cleanStart
-    subgraph all
-    start[开始]-->edit[修改标签]
-    edit--执行标签任务-->redis[提交到redis的allJob队列]
-    redis--JobAcceptor#parseMessage-->runJob[执行标签 调用海纳]
-    end
+<h3 id="graph-TD"><a href="#graph-TD" class="headerlink" title="graph TD"></a>graph TD</h3><p>```mermaid<br>graph TD;<br>    runJob–&gt;ostart<br>    ostart–&gt;jstart<br>    processRuleUpdatedLabel–是–&gt;cleanStart<br>    subgraph all<br>    start[开始]–&gt;edit[修改标签]<br>    edit–执行标签任务–&gt;redis[提交到redis的allJob队列]<br>    redis–JobAcceptor#parseMessage–&gt;runJob[执行标签 调用海纳]<br>    end</p>
+<pre><code>subgraph ocean[海纳任务]
+ostart[海纳task]--&gt;oend[海纳任务执行完成]
+end
 
-    subgraph ocean[海纳任务]
-    ostart[海纳task]-->oend[海纳任务执行完成]
-    end
+subgraph JobTracker
+jstart[从redis的scheduler:running获取运行中的任务]--&gt;isJobEnd&#123;任务是否到达终态&#125;
+isJobEnd--是--&gt;updateLabelCoverage[更新标签覆盖数]--&gt;processRuleUpdatedLabel&#123;判断规则是否改过&#125;
+updateLabelCoverage--&gt;processOneTimeLabelStatus[一次性标签需要修改oneTimeStatus状态位为已执行]--&gt;removeFromRedisSet[从redis的running中删除]--&gt;oend
+isJobEnd--否--&gt;jstart
+end
 
-    subgraph JobTracker
-    jstart[从redis的scheduler:running获取运行中的任务]-->isJobEnd{任务是否到达终态}
-    isJobEnd--是-->updateLabelCoverage[更新标签覆盖数]-->processRuleUpdatedLabel{判断规则是否改过}
-    updateLabelCoverage-->processOneTimeLabelStatus[一次性标签需要修改oneTimeStatus状态位为已执行]-->removeFromRedisSet[从redis的running中删除]-->oend
-    isJobEnd--否-->jstart
-    end
-
-    subgraph ofCleanOldRuleJob[清理修改过规则后的过期标签]
-    cleanStart-->cleanEnd
-    end</pre><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: Start|past:>http://www.google.com[blank]
+subgraph ofCleanOldRuleJob[清理修改过规则后的过期标签]
+cleanStart--&gt;cleanEnd
+end
+</code></pre>
+<p>```<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: Start|past:>http://www.google.com[blank]
 e=>end: End:>http://www.google.com
 op1=>operation: My Operation|past
 op2=>operation: Stuff|current
@@ -242,7 +235,8 @@ st->op1(right)->cond
 cond(yes, right)->c2
 cond(no)->sub1(left)->op1
 c2(yes)->io->e
-c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script>
+c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script></p>
+
         
         <br />
         <div id="comment-container">
