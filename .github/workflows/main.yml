@@ -29,7 +29,7 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
       - name: remove files
-        run: rm `ls -a ./|egrep -v '(.deploy_git)'`
+        run: rm -R `ls -a ./|egrep -v '(.deploy_git)'`
       - name: copy deploy
         run: cp -r .deploy_git/* .
       - name: echo ok
