@@ -28,10 +28,10 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
-#       - name: remove files
-#         run: rm `ls *|egrep -v '(.deploy_git)'`
-#       - name: copy deploy
-#         run: cp -r .deploy_git/* .
+      - name: remove files
+        run: rm `ls *|egrep -v '(.deploy_git)'`
+      - name: copy deploy
+        run: cp -r .deploy_git/* .
       - name: echo ok
         run: echo ok
       # Runs a set of commands using the runners shell
