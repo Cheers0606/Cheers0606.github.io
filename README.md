@@ -24,10 +24,10 @@ cat id_rsa.pub
 ## 测试是否配置成功
 ➜ ssh -T git@github.com
 The authenticity of host 'github.com (13.229.188.59)' can't be established.
-RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+RSA key fingerprint is SHA256:xxxxx.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added 'github.com,13.229.188.59' (RSA) to the list of known hosts.
-Hi Cheers0606! You've successfully authenticated, but GitHub does not provide shell access.
+Warning: Permanently added 'github.com,xxx' (RSA) to the list of known hosts.
+Hi xxx! You've successfully authenticated, but GitHub does not provide shell access.
 
 # 修改_config.yml的deploy配置
 # 安装deploy-git模块

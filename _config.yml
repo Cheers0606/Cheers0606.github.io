@@ -6,15 +6,15 @@ __: aircloud
 # Site
 title: 仰望星空
 subtitle: 'We are all in the gutter, but some of us are looking at the stars.'
-description: '希望能坚持下去'
+description: '仰望星空'
 keywords:
-author: 张俊杉
+author: Enoch
 language: zh
 timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
-url: http://example.com
+url: http://qyqx.us.kg
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -42,8 +42,11 @@ sidebar-avatar: img/favicon.ico
 # 友情链接
 friends: [
   {
-    title: "百度一下",
-    href: "https://www.baidu.com"
+    title: "感谢serv00",
+    href: "https://serv00.com/"
+  },{
+    title: "linux.do",
+    href: "https://linux.do/"
   },{
     title: "It helps SEO",
     href: "#"
