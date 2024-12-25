@@ -2,11 +2,10 @@
 title: Docker和容器化
 tags: docker
 overdue: false
-categories: elasticsearch
+categories: docker
 date: 2022-01-29 15:58:48
 updated: 2022-01-29 18:23:11
 ---
-# Docker和容器化
 
 ## 一、虚拟机和容器
 

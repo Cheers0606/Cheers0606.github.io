@@ -1,6 +1,6 @@
 ---
 title: 标签体系改造-TEST
-tags: trident label 标签
+tags: ["trident","label","标签"]
 overdue: true
 categories: trident
 date: 2021-01-19 17:49:48
