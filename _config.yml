@@ -9,7 +9,9 @@ subtitle: 'We are all in the gutter, but some of us are looking at the stars.'
 description: '仰望星空'
 keywords:
 author: Enoch
-language: zh
+language:
+  - zh-CN
+  - en
 timezone: ''
 
 # URL
@@ -38,6 +40,8 @@ github_username:    Cheers0606
 #linkedin_username:  小涛-聂-80964aba
 
 sidebar-avatar: img/favicon.ico
+avatar: img/favicon.ico
+favicon: img/favicon.ico
 # Friends
 # 友情链接
 friends: [
@@ -153,7 +157,8 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-aircloud
+#theme: hexo-theme-aircloud
+theme: hexo-theme-stellar
 
 flowchart:
   # raphael:   # optional, the source url of raphael.js
