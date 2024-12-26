@@ -1,6 +1,6 @@
 ---
 title: Elasticsearch-1
-tags: elasticsearch
+tags: ["elasticsearch"]
 overdue: false
 categories: elasticsearch
 date: 2021-01-19 12:58:48

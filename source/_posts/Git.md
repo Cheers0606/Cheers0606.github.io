@@ -2,7 +2,7 @@
 title: Git
 date: 2021-01-07 15:28:10
 updated: 2021-01-08 10:21:10
-tags: git
+tags: ["git"]
 categories: git # 目录
 ---
 # Git

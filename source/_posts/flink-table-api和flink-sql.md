@@ -1,6 +1,6 @@
 ---
 title: flink table api和flink sql
-tags: flink sql
+tags: ["flink sql","flink"]
 overdue: false
 categories: flink sql
 date: 2021-01-11 14:58:04

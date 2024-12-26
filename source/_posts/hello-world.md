@@ -2,7 +2,7 @@
 title: hello world
 date: 2018-07-17 12:33:59
 updated: 2021-01-08 12:33:59
-tags: hexo demo # 好像没用
+tags: ["hexo demo"] # 好像没用
 overdue: true #这一行
 categories: 测试 # 目录
 ---
