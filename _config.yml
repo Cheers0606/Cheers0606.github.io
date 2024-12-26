@@ -157,8 +157,8 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-#theme: hexo-theme-aircloud
-theme: hexo-theme-stellar
+theme: hexo-theme-aircloud
+#theme: hexo-theme-stellar
 
 flowchart:
   # raphael:   # optional, the source url of raphael.js

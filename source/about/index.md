@@ -3,6 +3,7 @@ title: "About"
 layout: "about"
 date: 2021-01-07 13:31:06
 tag: about
+tags: ["about"]
 comments: true
 ---
 

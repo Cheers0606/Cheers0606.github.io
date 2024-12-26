@@ -1,6 +1,6 @@
 ---
 title: 标签体系改造-多index方案-test
-tags: trident 标签体系
+tags: ["trident","标签体系"] 
 overdue: false
 categories: trident 标签体系
 date: 2021-01-25 14:41:32
