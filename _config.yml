@@ -157,7 +157,8 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-aircloud
+theme: tranquilpeak
+#theme: hexo-theme-aircloud
 #theme: hexo-theme-stellar
 
 flowchart:
